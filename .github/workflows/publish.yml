@@ -6,7 +6,7 @@ on:
       - completed
   push:
     branches:
-      - "main"
+      - "topupapi-nodejs"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
