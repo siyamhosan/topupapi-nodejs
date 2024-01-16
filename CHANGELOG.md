@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.0.2
+
+### Patch Changes
+
+- 3db9862: v1
+
 ## null
 
 ### Patch Changes
