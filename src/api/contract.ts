@@ -48,6 +48,7 @@ const exceptions = {
 function Responses<T extends z.ZodType<any>> (data: T) {
   return {
     200: responseWrapper(data),
+    201: responseWrapper(data),
     ...exceptions
   }
 }
