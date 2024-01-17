@@ -46,6 +46,13 @@ import {
   UserRegisterDto,
   UserRegisterResponse
 } from '@/types/user'
+import {
+  OrderCallbackPayload,
+  OrderEvent,
+  OrderState,
+  SequenceEvent,
+  SequenceState
+} from '@/types/state'
 import { diffSeconds } from '@/utils/diffSeconds'
 
 export {
@@ -92,7 +99,12 @@ export {
   User,
   UserRegisterDto,
   UserRegisterResponse,
-  diffSeconds
+  diffSeconds,
+  OrderCallbackPayload,
+  OrderEvent,
+  OrderState,
+  SequenceEvent,
+  SequenceState
 }
 
 export default TopUpClient
