@@ -19,7 +19,7 @@ import {
   UserRoles
 } from '@/types/init'
 import { Node, NodeAddDto } from '@/types/node'
-import { OrderPlaceResponse, OrderPostDto } from '@/types/order'
+import { OrderPlaceResponse, OrderPostDto, Order } from '@/types/order'
 import {
   FormattedStock,
   Stock,
@@ -104,7 +104,8 @@ export {
   OrderEvent,
   OrderState,
   SequenceEvent,
-  SequenceState
+  SequenceState,
+  Order
 }
 
 export default TopUpClient

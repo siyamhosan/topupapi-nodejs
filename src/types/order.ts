@@ -1,6 +1,17 @@
 import { number, object, string } from 'zod'
 import { SupportedGame } from './init'
 
+export const Order = object({
+  id: number(),
+  game: SupportedGame,
+  userId: number(),
+  node_id: number(),
+  uid: string(),
+  amount: string(),
+  callbackUrl: string(),
+  state: number()
+})
+
 export const OrderPostDto = object({
   game: SupportedGame,
   amount: string(),
@@ -12,13 +23,5 @@ export const OrderPostDto = object({
 export const OrderPlaceResponse = object({
   massage: string(),
   orderId: number(),
-  order: object({
-    id: number(),
-    game: SupportedGame,
-    userId: number(),
-    node_id: number(),
-    uid: string(),
-    callbackUrl: string(),
-    state: number()
-  })
+  order: Order
 })
