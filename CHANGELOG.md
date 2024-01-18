@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.0.5
+
+### Patch Changes
+
+- 5009842: Added Amount to the Order Object
+
 ## 0.0.4
 
 ### Patch Changes
