@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.0.6
+
+### Patch Changes
+
+- 690959a: Order Call Back Type Update
+
 ## 0.0.5
 
 ### Patch Changes
