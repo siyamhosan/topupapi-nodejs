@@ -61,6 +61,9 @@ export type SequenceEvent = {
 
 export type OrderCallbackPayload = {
   type: 'placed' | 'update' | 'finished'
-  state: OrderState
-  sequences: Record<number, SequenceState>
+  data: {
+    status: 'update' | 'finish' | 'failed' | 'placed'
+    orderState: OrderState
+    sequenceStates: Record<number, SequenceState>
+  }
 }
