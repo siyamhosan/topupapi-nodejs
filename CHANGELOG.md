@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.0.7
+
+### Patch Changes
+
+- 204abfa: Added Order Failed Data
+
 ## 0.0.6
 
 ### Patch Changes
