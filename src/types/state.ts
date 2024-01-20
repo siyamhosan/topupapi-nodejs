@@ -10,6 +10,11 @@ export interface OrderState {
   proceedToPayUrl: string
 
   orderSuccess: boolean
+
+  orderFailed: boolean
+  orderFailedMessage: string
+  orderFailedErrorCode: number | void
+  orderFailedProof: Buffer | void
 }
 
 export interface SequenceState {
