@@ -69,6 +69,9 @@ export const StockContract = c.router(
       path: '/',
       method: 'GET',
       description: 'Get all available stocks',
+      query: z.object({
+        merged: z.boolean().optional()
+      }),
       responses: Responses(FormattedStock.array())
     },
     add: {

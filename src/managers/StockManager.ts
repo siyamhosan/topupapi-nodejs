@@ -1,5 +1,6 @@
 import { BaseHeaders, StockContract } from "@/api/contract";
 import {
+  FormattedStock,
   StockAddDto,
   StockBuyDto,
   StockCheckDto,
@@ -7,6 +8,10 @@ import {
   StockUndoDto,
 } from "@/types/stock";
 import { initClient } from "@ts-rest/core";
+
+export interface StockFetchOptions {
+  merged?: boolean;
+}
 
 export class StockManager {
   private _api;
@@ -22,10 +27,17 @@ export class StockManager {
    *
    * @description Fetches all current stocks
    */
-  async fetch() {
-    const res = await this._api.fetch();
+  async fetch(otp?: StockFetchOptions) {
+    const res = await this._api.fetch({
+      query: otp,
+    });
 
     if (res.status === 200 || res.status === 201) {
+      if (otp?.merged)
+        return res.body.data as (typeof FormattedStock._type & {
+          quantity: number;
+        })[];
+
       return res.body.data;
     } else {
       throw res.body;
