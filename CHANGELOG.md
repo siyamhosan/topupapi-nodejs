@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.0.8
+
+### Patch Changes
+
+- a17cb00: Added Stock Fetch Options
+
 ## 0.0.7
 
 ### Patch Changes
