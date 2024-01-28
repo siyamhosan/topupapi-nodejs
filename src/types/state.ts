@@ -14,7 +14,7 @@ export interface OrderState {
   orderFailed: boolean
   orderFailedMessage: string
   orderFailedErrorCode: number | void
-  orderFailedProof: Buffer | void
+  orderFailedProof: string | void
 }
 
 export interface SequenceState {
@@ -28,16 +28,16 @@ export interface SequenceState {
   stockSerial: string
   stockUseSuccess: boolean
   stockAlreadyUsed: boolean
-  stockAlreadyUseProof: Buffer
+  stockAlreadyUseProof: string
 
   applyBackUp: boolean
   backupStockSerial: string
   backupStockUseSuccess: boolean
   backupStockAlreadyUsed: boolean
-  backupStockAlreadyUseProof: Buffer
+  backupStockAlreadyUseProof: string
 
   paymentSuccess: boolean
-  paymentProof: Buffer
+  paymentProof: string
 }
 
 export type OrderEvent = {
