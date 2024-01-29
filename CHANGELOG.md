@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.1.0
+
+### Minor Changes
+
+- 49a47d2: added available:bol property in Stock.buy
+
 ## 0.0.10
 
 ### Patch Changes
