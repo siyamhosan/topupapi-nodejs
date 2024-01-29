@@ -77,10 +77,13 @@ export const StockCheckResponse = object({
 });
 
 export const StockBuyResponse = object({
-  available: literal(true),
+  available: boolean(),
   quantity: number(),
   codes: object({
-    code: string(),
+    code: object({
+      amount: number(),
+      serial: string(),
+    }),
     codeType: StockType,
     game: SupportedGame,
   }),
