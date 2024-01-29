@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.1.1
+
+### Patch Changes
+
+- 11cf0e8: typing fix
+
 ## 0.1.0
 
 ### Minor Changes
