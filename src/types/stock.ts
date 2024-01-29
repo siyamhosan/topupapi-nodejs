@@ -77,6 +77,7 @@ export const StockCheckResponse = object({
 });
 
 export const StockBuyResponse = object({
+  available: z.boolean(),
   quantity: number(),
   codes: object({
     code: string(),
