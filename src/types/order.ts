@@ -1,5 +1,5 @@
-import { number, object, string } from 'zod'
-import { SupportedGame } from './init'
+import { number, object, string } from "zod";
+import { SupportedGame } from "./init";
 
 export const Order = object({
   id: number(),
@@ -9,19 +9,28 @@ export const Order = object({
   uid: string(),
   amount: string(),
   callbackUrl: string(),
-  state: number()
-})
+  state: number(),
+});
 
 export const OrderPostDto = object({
   game: SupportedGame,
   amount: string(),
   uid: string(),
   quantity: number(),
-  callbackUrl: string()
-})
+  callbackUrl: string(),
+});
 
 export const OrderPlaceResponse = object({
   massage: string(),
   orderId: number(),
-  order: Order
-})
+  order: Order,
+});
+
+export const OrderCombinationBarkerPostDto = object({
+  amount: string(),
+  game: SupportedGame,
+});
+
+export const OrderCombinationBarkerResponse = object({
+  combinations: number().array(),
+});

@@ -1,5 +1,10 @@
 import { Node, NodeAddDto } from '@/types/node'
-import { OrderPlaceResponse, OrderPostDto } from '@/types/order'
+import {
+  OrderCombinationBarkerPostDto,
+  OrderCombinationBarkerResponse,
+  OrderPlaceResponse,
+  OrderPostDto
+} from '@/types/order'
 import {
   FormattedStock,
   StockAddDto,
@@ -120,6 +125,13 @@ export const OrderContract = c.router(
       body: OrderPostDto,
       description: 'Place new order',
       responses: Responses(OrderPlaceResponse)
+    },
+    combinationBreaker: {
+      path: '/combination-breaker',
+      method: 'POST',
+      body: OrderCombinationBarkerPostDto,
+      description: 'Get all possible combinations for a given amount',
+      responses: Responses(OrderCombinationBarkerResponse)
     }
   },
   {
