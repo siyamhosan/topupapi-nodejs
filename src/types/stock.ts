@@ -1,4 +1,4 @@
-import { array, boolean, number, object, string, z } from "zod";
+import { array, boolean, literal, number, object, string, z } from "zod";
 import { StockType, SupportedGame } from "./init";
 
 export const UNIPIN_VOUCHER = object({
@@ -77,7 +77,7 @@ export const StockCheckResponse = object({
 });
 
 export const StockBuyResponse = object({
-  available: z.boolean(),
+  available: literal(true),
   quantity: number(),
   codes: object({
     code: string(),
