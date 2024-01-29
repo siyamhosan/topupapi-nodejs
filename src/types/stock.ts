@@ -86,7 +86,7 @@ export const StockBuyResponse = object({
     }),
     codeType: StockType,
     game: SupportedGame,
-  }),
+  }).array(),
 }).or(StockCheckResponse);
 
 export const StockRefundResponse = object({
