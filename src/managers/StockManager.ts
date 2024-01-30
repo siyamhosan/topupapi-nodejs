@@ -2,6 +2,7 @@ import { BaseHeaders, StockContract } from "@/api/contract";
 import {
   FormattedStock,
   StockAddDto,
+  StockAddOptions,
   StockBuyDto,
   StockCheckDto,
   StockRefundDto,
@@ -48,7 +49,9 @@ export class StockManager {
   /**
    * @description Adds a new stock
    */
-  async add({ price, amount, codeTxt, game }: typeof StockAddDto._type) {
+  async add({ price, amount, codeTxt, game }: StockAddOptions) {
+    if (typeof price === "number") price = price.toString();
+
     const res = await this._api.add({
       body: {
         price,

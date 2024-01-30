@@ -40,8 +40,15 @@ export const StockAddDto = object({
   game: SupportedGame,
   codeTxt: string(),
   amount: number(),
-  price: number(),
+  price: string(),
 });
+
+export interface StockAddOptions {
+  game: typeof SupportedGame._type;
+  codeTxt: string;
+  amount: number;
+  price: string | number;
+}
 
 export const StockCheckDto = object({
   game: SupportedGame,
