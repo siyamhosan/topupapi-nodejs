@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.2.0
+
+### Minor Changes
+
+- 4f046b1: Stock Add price type fix
+
 ## 0.1.3
 
 ### Patch Changes
