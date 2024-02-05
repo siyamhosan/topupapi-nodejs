@@ -28,13 +28,17 @@ export interface SequenceState {
   stockSerial: string
   stockUseSuccess: boolean
   stockAlreadyUsed: boolean
-  stockAlreadyUseProof: string
+  stockAlreadyUseProof: string | void
+  stockTyped: boolean
+  stockEntered: boolean
 
   applyBackUp: boolean
   backupStockSerial: string
   backupStockUseSuccess: boolean
   backupStockAlreadyUsed: boolean
   backupStockAlreadyUseProof: string
+  backupStockTyped: boolean
+  backupStockEntered: boolean
 
   paymentSuccess: boolean
   paymentProof: string
