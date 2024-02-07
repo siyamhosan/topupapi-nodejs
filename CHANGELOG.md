@@ -1,5 +1,15 @@
 # topupapi
 
+## 0.3.0
+
+### Minor Changes
+
+- cc704bf: Stock types paths refector.
+
+### Patch Changes
+
+- f1ac4e8: added stock typing state
+
 ## 0.2.0
 
 ### Minor Changes
