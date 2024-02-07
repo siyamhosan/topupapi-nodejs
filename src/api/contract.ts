@@ -13,6 +13,7 @@ import {
   StockBuyResponse,
   StockCheckDto,
   StockCheckResponse,
+  StockFetchResponse,
   StockRefundDto,
   StockRefundResponse,
   StockUndoDto,
@@ -29,6 +30,7 @@ import {
 } from '@/types/user'
 import { initContract } from '@ts-rest/core'
 import { z } from 'zod'
+import { SupportedGame } from '..'
 
 const c = initContract()
 
@@ -75,9 +77,9 @@ export const StockContract = c.router(
       method: 'GET',
       description: 'Get all available stocks',
       query: z.object({
-        merged: z.boolean().optional()
+        game: SupportedGame.optional()
       }),
-      responses: Responses(FormattedStock.array())
+      responses: Responses(StockFetchResponse)
     },
     add: {
       path: '/add',
@@ -96,7 +98,7 @@ export const StockContract = c.router(
       path: '/buy',
       method: 'POST',
       body: StockBuyDto,
-      responses: Responses(StockBuyResponse)
+      responses: StockBuyResponse
     },
     refund: {
       path: '/refund',
