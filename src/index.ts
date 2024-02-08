@@ -35,7 +35,10 @@ import {
   StockUndoResponse,
   StockUndoTypes,
   UNIPIN_GIFT_CARD,
-  UNIPIN_VOUCHER
+  UNIPIN_VOUCHER,
+  StockAddOptions,
+  StockFetchResponse,
+  StockMapObj
 } from '@/types/stock'
 import {
   Merchant,
@@ -105,7 +108,10 @@ export {
   OrderState,
   SequenceEvent,
   SequenceState,
-  Order
+  Order,
+  StockAddOptions,
+  StockFetchResponse,
+  StockMapObj
 }
 
 export default TopUpClient
