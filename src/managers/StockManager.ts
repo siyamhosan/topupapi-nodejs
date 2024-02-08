@@ -77,7 +77,7 @@ export class StockManager {
       }
     })
 
-    if (res.status === 200 || res.status === 201) {
+    if (res.status === 200 || res.status === 201 || res.status === 404) {
       return res.body.data
     } else {
       throw res.body
