@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.3.1
+
+### Patch Changes
+
+- edc909e: 404 ?
+
 ## 0.3.0
 
 ### Minor Changes
