@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.3.2
+
+### Patch Changes
+
+- 2d25fb2: exported types
+
 ## 0.3.1
 
 ### Patch Changes
