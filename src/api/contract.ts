@@ -31,6 +31,12 @@ import {
 import { initContract } from '@ts-rest/core'
 import { z } from 'zod'
 import { SupportedGame } from '..'
+import {
+  StockPriceFetchResponse,
+  StockPriceSetResponse,
+  StockPriceSetUpdateDto,
+  StockPriceUpdateResponse
+} from '@/types/stockPrice'
 
 const c = initContract()
 
@@ -116,6 +122,39 @@ export const StockContract = c.router(
   {
     baseHeaders,
     pathPrefix: '/stock'
+  }
+)
+
+export const StockPriceContract = c.router(
+  {
+    fetch: {
+      path: '/',
+      method: 'GET',
+      query: z.object({
+        game: SupportedGame.optional(),
+        amount: z.number().optional()
+      }),
+      description: 'Get all available stock prices',
+      responses: Responses(StockPriceFetchResponse)
+    },
+    set: {
+      path: '/',
+      method: 'POST',
+      body: StockPriceSetUpdateDto,
+      description: 'Set new stock price',
+      responses: Responses(StockPriceSetResponse)
+    },
+    update: {
+      path: '/',
+      method: 'PATCH',
+      body: StockPriceSetUpdateDto,
+      description: 'Update stock price',
+      responses: Responses(StockPriceUpdateResponse)
+    }
+  },
+  {
+    baseHeaders,
+    pathPrefix: '/stock/price'
   }
 )
 

@@ -1,7 +1,5 @@
 import { BaseHeaders, StockContract } from '@/api/contract'
 import {
-  FormattedStock,
-  StockAddDto,
   StockAddOptions,
   StockBuyDto,
   StockCheckDto,
@@ -9,7 +7,7 @@ import {
   StockUndoDto
 } from '@/types/stock'
 import { initClient } from '@ts-rest/core'
-import { SupportedGame, SupportedGames } from '..'
+import { SupportedGame } from '..'
 
 export interface StockFetchOptions {
   game?: typeof SupportedGame._type

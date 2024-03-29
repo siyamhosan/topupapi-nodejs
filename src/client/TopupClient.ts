@@ -2,6 +2,7 @@ import { API_URL } from '@/config'
 import { NodeManager } from '@/managers/NodeManager'
 import { OrderManager } from '@/managers/OrderManager'
 import { StockManager } from '@/managers/StockManager'
+import { StockPriceManager } from '@/managers/StockPriceManager'
 import { UserManager } from '@/managers/UserManager'
 
 export type TopUpClientConfig =
@@ -16,6 +17,7 @@ export class TopUpClient {
   private _baseUrl: string
 
   public stocks
+  public stockPrices
   public users
   public orders
   public nodes
@@ -30,6 +32,10 @@ export class TopUpClient {
     }
 
     this.stocks = new StockManager({
+      baseUrl: this._baseUrl,
+      token: this._token
+    })
+    this.stockPrices = new StockPriceManager({
       baseUrl: this._baseUrl,
       token: this._token
     })
