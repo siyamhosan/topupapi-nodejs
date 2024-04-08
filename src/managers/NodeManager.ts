@@ -1,5 +1,5 @@
 import { BaseHeaders, NodeContract } from "@/api/contract";
-import { NodeAddDto } from "@/types/node";
+import { NodeAddDto, PartialShardConfigDto } from "@/types/node";
 import { initClient } from "@ts-rest/core";
 
 export class NodeManager {
@@ -37,6 +37,37 @@ export class NodeManager {
         connectionToken,
         endPoint,
       },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
+   * @description Fetches the virtual nodes configuration
+   * @access private Admin Only
+   */
+  async shardsConfig() {
+    const res = await this._api.shardConfig();
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
+   * @description Updates the virtual nodes configuration
+   * @access private Admin Only
+   */
+  async updateShardConfig(data: typeof PartialShardConfigDto._type) {
+    const res = await this._api.updateShardConfig({
+      body: data,
     });
 
     if (res.status === 200 || res.status === 201) {

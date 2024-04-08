@@ -3,23 +3,35 @@ import {
   NodeContract,
   OrderContract,
   StockContract,
-  UserContract
-} from '@/api/contract'
-import { TopUpClient, TopUpClientConfig } from '@/client/TopupClient'
-import { NodeManager } from '@/managers/NodeManager'
-import { OrderManager } from '@/managers/OrderManager'
-import { StockManager } from '@/managers/StockManager'
-import { UserManager } from '@/managers/UserManager'
+  UserContract,
+  StockPriceContract,
+} from "@/api/contract";
+import { TopUpClient, TopUpClientConfig } from "@/client/TopupClient";
+import { NodeManager } from "@/managers/NodeManager";
+import { OrderManager } from "@/managers/OrderManager";
+import { StockManager } from "@/managers/StockManager";
+import { UserManager } from "@/managers/UserManager";
 import {
   StockType,
   StockTypes,
   SupportedGame,
   SupportedGames,
   UserRole,
-  UserRoles
-} from '@/types/init'
-import { Node, NodeAddDto } from '@/types/node'
-import { OrderPlaceResponse, OrderPostDto, Order } from '@/types/order'
+  UserRoles,
+} from "@/types/init";
+import {
+  Node,
+  NodeAddDto,
+  PartialShardConfigDto,
+  ShardConfigDto,
+} from "@/types/node";
+import {
+  OrderPlaceResponse,
+  OrderPostDto,
+  Order,
+  OrderCombinationBarkerPostDto,
+  OrderCombinationBarkerResponse,
+} from "@/types/order";
 import {
   FormattedStock,
   Stock,
@@ -38,8 +50,8 @@ import {
   UNIPIN_VOUCHER,
   StockAddOptions,
   StockFetchResponse,
-  StockMapObj
-} from '@/types/stock'
+  StockMapObj,
+} from "@/types/stock";
 import {
   Merchant,
   MerchantRegisterDto,
@@ -47,16 +59,16 @@ import {
   MerchantUpdateDto,
   User,
   UserRegisterDto,
-  UserRegisterResponse
-} from '@/types/user'
+  UserRegisterResponse,
+} from "@/types/user";
 import {
   OrderCallbackPayload,
   OrderEvent,
   OrderState,
   SequenceEvent,
-  SequenceState
-} from '@/types/state'
-import { diffSeconds } from '@/utils/diffSeconds'
+  SequenceState,
+} from "@/types/state";
+import { diffSeconds } from "@/utils/diffSeconds";
 
 export {
   BaseHeaders,
@@ -111,7 +123,12 @@ export {
   Order,
   StockAddOptions,
   StockFetchResponse,
-  StockMapObj
-}
+  StockMapObj,
+  OrderCombinationBarkerPostDto,
+  OrderCombinationBarkerResponse,
+  PartialShardConfigDto,
+  ShardConfigDto,
+  StockPriceContract,
+};
 
-export default TopUpClient
+export default TopUpClient;

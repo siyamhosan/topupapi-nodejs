@@ -1,4 +1,4 @@
-import { Node, NodeAddDto } from '@/types/node'
+import { Node, NodeAddDto, ShardConfigDto } from '@/types/node'
 import {
   OrderCombinationBarkerPostDto,
   OrderCombinationBarkerResponse,
@@ -194,6 +194,19 @@ export const NodeContract = c.router(
       method: 'POST',
       body: NodeAddDto,
       responses: Responses(Node)
+    },
+    shardConfig: {
+      path: '/shards/config',
+      method: 'GET',
+      description: 'Get all Virtual Shard Configurations',
+      responses: Responses(ShardConfigDto)
+    },
+    updateShardConfig: {
+      path: '/shards/config',
+      method: 'PATCH',
+      body: ShardConfigDto.partial(),
+      description: 'Update Virtual Shard Configuration',
+      responses: Responses(ShardConfigDto)
     }
   },
   {
