@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.4.2
+
+### Patch Changes
+
+- f6917b3: Shard config LoginCache added
+
 ## 0.4.1
 
 ### Patch Changes
