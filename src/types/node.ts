@@ -23,6 +23,7 @@ export const ShardConfigDto = object({
   solve_captcha: boolean(),
   login_system_2: boolean(),
   login_1_as_backup: boolean(),
+  loginCache: boolean(),
 });
 
 export const PartialShardConfigDto = ShardConfigDto.partial();
