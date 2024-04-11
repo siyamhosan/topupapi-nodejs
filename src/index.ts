@@ -10,6 +10,7 @@ import { TopUpClient, TopUpClientConfig } from "@/client/TopupClient";
 import { NodeManager } from "@/managers/NodeManager";
 import { OrderManager } from "@/managers/OrderManager";
 import { StockManager } from "@/managers/StockManager";
+import { StockPriceManager } from "@/managers/StockPriceManager";
 import { UserManager } from "@/managers/UserManager";
 import {
   StockType,
@@ -52,6 +53,15 @@ import {
   StockFetchResponse,
   StockMapObj,
 } from "@/types/stock";
+import {
+  FormattedStockPrice,
+  StockPriceFetchResponse,
+  StockPriceMapObj,
+  StockPriceRaw,
+  StockPriceSetResponse,
+  StockPriceSetUpdateDto,
+  StockPriceUpdateResponse,
+} from "@/types/stockPrice";
 import {
   Merchant,
   MerchantRegisterDto,
@@ -129,6 +139,14 @@ export {
   PartialShardConfigDto,
   ShardConfigDto,
   StockPriceContract,
+  StockPriceManager,
+  StockPriceFetchResponse,
+  StockPriceMapObj,
+  StockPriceRaw,
+  StockPriceSetResponse,
+  StockPriceSetUpdateDto,
+  StockPriceUpdateResponse,
+  FormattedStockPrice,
 };
 
 export default TopUpClient;

@@ -47,7 +47,7 @@ export const StockPriceMapObj = object({
 });
 
 export const StockPriceFetchResponse = object({
-  stocks: StockPriceMapObj,
+  prices: StockPriceMapObj,
 });
 
 export const StockPriceSetResponse = object({
