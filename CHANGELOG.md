@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.4.3
+
+### Patch Changes
+
+- 7bc4fd7: Stock Price manager type bug fix
+
 ## 0.4.2
 
 ### Patch Changes
