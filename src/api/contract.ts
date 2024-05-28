@@ -1,12 +1,11 @@
-import { Node, NodeAddDto, ShardConfigDto } from '@/types/node'
+import { Node, NodeAddDto, ShardConfigDto } from "@/types/node";
 import {
   OrderCombinationBarkerPostDto,
   OrderCombinationBarkerResponse,
   OrderPlaceResponse,
-  OrderPostDto
-} from '@/types/order'
+  OrderPostDto,
+} from "@/types/order";
 import {
-  FormattedStock,
   StockAddDto,
   StockAddResponse,
   StockBuyDto,
@@ -17,8 +16,14 @@ import {
   StockRefundDto,
   StockRefundResponse,
   StockUndoDto,
-  StockUndoResponse
-} from '@/types/stock'
+  StockUndoResponse,
+} from "@/types/stock";
+import {
+  StockPriceFetchResponse,
+  StockPriceSetResponse,
+  StockPriceSetUpdateDto,
+  StockPriceUpdateResponse,
+} from "@/types/stockPrice";
 import {
   Merchant,
   MerchantRegisterDto,
@@ -26,240 +31,331 @@ import {
   MerchantUpdateDto,
   User,
   UserRegisterDto,
-  UserRegisterResponse
-} from '@/types/user'
-import { initContract } from '@ts-rest/core'
-import { z } from 'zod'
-import { SupportedGame } from '..'
-import {
-  StockPriceFetchResponse,
-  StockPriceSetResponse,
-  StockPriceSetUpdateDto,
-  StockPriceUpdateResponse
-} from '@/types/stockPrice'
+  UserRegisterResponse,
+} from "@/types/user";
+import { initContract } from "@ts-rest/core";
+import { object, z } from "zod";
+import { SupportedGame } from "..";
+import { ShardHealth } from "@/types/shard";
 
-const c = initContract()
+const c = initContract();
 
 const exceptionType = z.object({
   statusCode: z.number(),
   message: z.string().array(),
-  data: z.unknown().optional()
-})
+  data: z.unknown().optional(),
+});
 
-function responseWrapper<T extends z.ZodType<any>> (data: T) {
+function responseWrapper<T extends z.ZodType<any>>(data: T) {
   return z.object({
     data,
-    statusCode: z.number()
-  })
+    statusCode: z.number(),
+  });
 }
 
 const exceptions = {
   404: responseWrapper(exceptionType),
-  500: responseWrapper(exceptionType)
-}
+  500: responseWrapper(exceptionType),
+};
 
-function Responses<T extends z.ZodType<any>> (data: T) {
+function Responses<T extends z.ZodType<any>>(data: T) {
   return {
     200: responseWrapper(data),
     201: responseWrapper(data),
-    ...exceptions
-  }
+    ...exceptions,
+  };
 }
 
 const baseHeaders = z.object({
   Authorization: z.string(),
-  'Content-Type': z.string()
-})
+  "Content-Type": z.string(),
+});
 
 export const BaseHeaders = ({ token }: { token: string }) => ({
   Authorization: `Bearer ${token}`,
-  'Content-Type': 'application/json'
-})
+  "Content-Type": "application/json",
+});
 
 export const StockContract = c.router(
   {
     fetch: {
-      path: '/',
-      method: 'GET',
-      description: 'Get all available stocks',
+      path: "/",
+      method: "GET",
+      description: "Get all available stocks",
       query: z.object({
-        game: SupportedGame.optional()
+        game: SupportedGame.optional(),
       }),
-      responses: Responses(StockFetchResponse)
+      responses: Responses(StockFetchResponse),
     },
     add: {
-      path: '/add',
-      method: 'POST',
+      path: "/add",
+      method: "POST",
       body: StockAddDto,
-      description: 'Add new stock',
-      responses: Responses(StockAddResponse)
+      description: "Add new stock",
+      responses: Responses(StockAddResponse),
     },
     check: {
-      path: '/check',
-      method: 'POST',
+      path: "/check",
+      method: "POST",
       body: StockCheckDto,
-      responses: Responses(StockCheckResponse)
+      responses: Responses(StockCheckResponse),
     },
     buy: {
-      path: '/buy',
-      method: 'POST',
+      path: "/buy",
+      method: "POST",
       body: StockBuyDto,
-      responses: StockBuyResponse
+      responses: StockBuyResponse,
     },
     refund: {
-      path: '/refund',
-      method: 'PATCH',
+      path: "/refund",
+      method: "PATCH",
       body: StockRefundDto,
-      responses: Responses(StockRefundResponse)
+      responses: Responses(StockRefundResponse),
     },
     undo: {
-      path: '/undo',
-      method: 'PATCH',
+      path: "/undo",
+      method: "PATCH",
       body: StockUndoDto,
-      responses: Responses(StockUndoResponse)
-    }
+      responses: Responses(StockUndoResponse),
+    },
   },
   {
     baseHeaders,
-    pathPrefix: '/stock'
+    pathPrefix: "/stock",
   }
-)
+);
 
 export const StockPriceContract = c.router(
   {
     fetch: {
-      path: '/',
-      method: 'GET',
+      path: "/",
+      method: "GET",
       query: z.object({
         game: SupportedGame.optional(),
-        amount: z.number().optional()
+        amount: z.number().optional(),
       }),
-      description: 'Get all available stock prices',
-      responses: Responses(StockPriceFetchResponse)
+      description: "Get all available stock prices",
+      responses: Responses(StockPriceFetchResponse),
     },
     set: {
-      path: '/',
-      method: 'POST',
+      path: "/",
+      method: "POST",
       body: StockPriceSetUpdateDto,
-      description: 'Set new stock price',
-      responses: Responses(StockPriceSetResponse)
+      description: "Set new stock price",
+      responses: Responses(StockPriceSetResponse),
     },
     update: {
-      path: '/',
-      method: 'PATCH',
+      path: "/",
+      method: "PATCH",
       body: StockPriceSetUpdateDto,
-      description: 'Update stock price',
-      responses: Responses(StockPriceUpdateResponse)
-    }
+      description: "Update stock price",
+      responses: Responses(StockPriceUpdateResponse),
+    },
   },
   {
     baseHeaders,
-    pathPrefix: '/stock/price'
+    pathPrefix: "/stock/price",
   }
-)
+);
 
 export const OrderContract = c.router(
   {
     place: {
-      path: '/',
-      method: 'POST',
+      path: "/",
+      method: "POST",
       body: OrderPostDto,
-      description: 'Place new order',
-      responses: Responses(OrderPlaceResponse)
+      description: "Place new order",
+      responses: Responses(OrderPlaceResponse),
     },
     combinationBreaker: {
-      path: '/combination-breaker',
-      method: 'POST',
+      path: "/combination-breaker",
+      method: "POST",
       body: OrderCombinationBarkerPostDto,
-      description: 'Get all possible combinations for a given amount',
-      responses: Responses(OrderCombinationBarkerResponse)
-    }
+      description: "Get all possible combinations for a given amount",
+      responses: Responses(OrderCombinationBarkerResponse),
+    },
+    status: {
+      path: "/status/:orderId",
+      method: "GET",
+      pathParams: z.object({
+        orderId: z.string(),
+      }),
+      description: "Get order status",
+      responses: Responses(OrderPlaceResponse),
+    },
   },
   {
     baseHeaders,
-    pathPrefix: '/order'
+    pathPrefix: "/order",
   }
-)
+);
 
 export const NodeContract = c.router(
   {
     fetch: {
-      path: '/',
-      method: 'GET',
-      description: 'Get all available nodes',
-      responses: Responses(Node.array())
+      path: "/",
+      method: "GET",
+      description: "Get all available nodes",
+      responses: Responses(Node.array()),
     },
     add: {
-      path: '/add',
-      method: 'POST',
+      path: "/add",
+      method: "POST",
       body: NodeAddDto,
-      responses: Responses(Node)
+      responses: Responses(Node),
     },
     shardConfig: {
-      path: '/shards/config',
-      method: 'GET',
-      description: 'Get all Virtual Shard Configurations',
-      responses: Responses(ShardConfigDto)
+      path: "/shards/config",
+      method: "GET",
+      description: "Get all Virtual Shard Configurations",
+      responses: Responses(ShardConfigDto),
     },
     updateShardConfig: {
-      path: '/shards/config',
-      method: 'PATCH',
+      path: "/shards/config",
+      method: "PATCH",
       body: ShardConfigDto.partial(),
-      description: 'Update Virtual Shard Configuration',
-      responses: Responses(ShardConfigDto)
-    }
+      description: "Update Virtual Shard Configuration",
+      responses: Responses(ShardConfigDto),
+    },
   },
   {
     baseHeaders,
-    pathPrefix: '/node'
+    pathPrefix: "/node",
   }
-)
+);
 
 export const UserContract = c.router(
   {
     fetch: {
-      path: '/',
-      method: 'GET',
-      description: 'Get user info',
-      responses: Responses(User)
+      path: "/",
+      method: "GET",
+      description: "Get user info",
+      responses: Responses(User),
     },
     register: {
-      path: '/register',
-      method: 'POST',
+      path: "/register",
+      method: "POST",
       body: UserRegisterDto,
-      description: 'Register new user',
-      responses: Responses(UserRegisterResponse)
+      description: "Register new user",
+      responses: Responses(UserRegisterResponse),
     },
     fetchMerchants: {
-      path: '/merchant',
-      method: 'GET',
-      description: 'Get all merchants',
-      responses: Responses(Merchant.array())
+      path: "/merchant",
+      method: "GET",
+      description: "Get all merchants",
+      responses: Responses(Merchant.array()),
     },
     addMerchant: {
-      path: '/merchant',
-      method: 'POST',
+      path: "/merchant",
+      method: "POST",
       body: MerchantRegisterDto,
-      description: 'Add new merchant',
-      responses: Responses(Merchant)
+      description: "Add new merchant",
+      responses: Responses(Merchant),
     },
     updateMerchant: {
-      path: '/merchant',
-      method: 'PATCH',
+      path: "/merchant",
+      method: "PATCH",
       body: MerchantUpdateDto,
-      description: 'Update merchant',
-      responses: Responses(Merchant)
+      description: "Update merchant",
+      responses: Responses(Merchant),
     },
     removeMerchant: {
-      path: '/merchant',
-      method: 'DELETE',
+      path: "/merchant",
+      method: "DELETE",
       body: MerchantRemoveDto,
-      description: 'Remove merchant',
-      responses: Responses(Merchant)
-    }
+      description: "Remove merchant",
+      responses: Responses(Merchant),
+    },
   },
   {
     baseHeaders,
-    pathPrefix: '/user'
+    pathPrefix: "/user",
   }
-)
+);
+
+export const ShardContract = c.router(
+  {
+    fetch: {
+      path: "/status",
+      method: "GET",
+      description: "Get all available shards status",
+      responses: Responses(object({ nodes: ShardHealth.array() })),
+    },
+    status: {
+      path: "/status/:name",
+      pathParams: z.object({ name: z.string() }),
+      method: "GET",
+      description: "Get shard status by name",
+      responses: Responses(object({ node: ShardHealth })),
+    },
+    block: {
+      path: "/block/:name",
+      pathParams: z.object({ name: z.string() }),
+      method: "POST",
+      body: object({}),
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
+    unblock: {
+      path: "/unblock/:name",
+      pathParams: z.object({ name: z.string() }),
+      body: object({}),
+      method: "POST",
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
+    strikes: {
+      path: "/strike",
+      method: "GET",
+      description: "Get all strikes of a shard",
+      responses: Responses(
+        object({
+          strikes: z.string(),
+        })
+      ),
+    },
+    strike: {
+      path: "/strike/:name",
+      pathParams: z.object({ name: z.string() }),
+      method: "POST",
+      body: object({}),
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
+    unStrike: {
+      path: "/unstrike/:name",
+      pathParams: z.object({ name: z.string() }),
+      method: "POST",
+      body: object({}),
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
+    reboot: {
+      path: "/reboot/:name",
+      pathParams: z.object({ name: z.string() }),
+      method: "POST",
+      body: object({}),
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
+  },
+  {
+    baseHeaders,
+    pathPrefix: "/shard",
+  }
+);

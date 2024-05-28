@@ -12,6 +12,7 @@ import { OrderManager } from "@/managers/OrderManager";
 import { StockManager } from "@/managers/StockManager";
 import { StockPriceManager } from "@/managers/StockPriceManager";
 import { UserManager } from "@/managers/UserManager";
+import { ShardManager } from "./managers/ShardManager";
 import {
   StockType,
   StockTypes,
@@ -78,6 +79,7 @@ import {
   SequenceEvent,
   SequenceState,
 } from "@/types/state";
+import { ShardHealth } from "@/types/shard";
 import { diffSeconds } from "@/utils/diffSeconds";
 
 export {
@@ -147,6 +149,8 @@ export {
   StockPriceSetUpdateDto,
   StockPriceUpdateResponse,
   FormattedStockPrice,
+  ShardHealth,
+  ShardManager,
 };
 
 export default TopUpClient;
