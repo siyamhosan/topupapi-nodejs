@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.1
+
+### Patch Changes
+
+- f21f776: Added new config ver 's
+
 ## 0.5.0
 
 ### Minor Changes
