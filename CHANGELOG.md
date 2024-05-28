@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.0
+
+### Minor Changes
+
+- d69e8cb: Added Shards Management
+
 ## 0.4.3
 
 ### Patch Changes
