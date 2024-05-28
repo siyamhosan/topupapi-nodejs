@@ -24,6 +24,9 @@ export const ShardConfigDto = object({
   login_system_2: boolean(),
   login_1_as_backup: boolean(),
   loginCache: boolean(),
+
+  forceCancelation: boolean(),
+  loginAccountCache: boolean(),
 });
 
 export const PartialShardConfigDto = ShardConfigDto.partial();
