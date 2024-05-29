@@ -33,6 +33,13 @@ import {
   Order,
   OrderCombinationBarkerPostDto,
   OrderCombinationBarkerResponse,
+  OrderStatusResponse,
+  orderSchema,
+  orderStateSchema,
+  orderStatusObj,
+  sequenceSchema,
+  sequenceStateSchema,
+  userSchema,
 } from "@/types/order";
 import {
   FormattedStock,
@@ -151,6 +158,13 @@ export {
   FormattedStockPrice,
   ShardHealth,
   ShardManager,
+  OrderStatusResponse,
+  orderSchema,
+  orderStateSchema,
+  orderStatusObj,
+  sequenceSchema,
+  sequenceStateSchema,
+  userSchema,
 };
 
 export default TopUpClient;

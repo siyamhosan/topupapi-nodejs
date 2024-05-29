@@ -59,8 +59,25 @@ export class OrderManager {
     }
   }
 
+  /**
+   * @description Fetches all orders
+   */
   async fetch() {
     const res = await this._api.orders();
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
+   * @description Fetches a single order status
+   */
+  async status({ orderId }: { orderId: string }) {
+    const res = await this._api.status({ params: { orderId } });
+
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {

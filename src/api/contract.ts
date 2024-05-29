@@ -4,6 +4,7 @@ import {
   OrderCombinationBarkerResponse,
   OrderPlaceResponse,
   OrderPostDto,
+  OrderStatusResponse,
 } from "@/types/order";
 import {
   StockAddDto,
@@ -181,7 +182,7 @@ export const OrderContract = c.router(
         orderId: z.string(),
       }),
       description: "Get order status",
-      responses: Responses(OrderPlaceResponse),
+      responses: Responses(OrderStatusResponse),
     },
     orders: {
       path: "/orders",
