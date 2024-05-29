@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.3
+
+### Patch Changes
+
+- 85c8b0e: Order Status Type fixes
+
 ## 0.5.2
 
 ### Patch Changes
