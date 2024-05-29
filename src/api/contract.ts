@@ -183,6 +183,18 @@ export const OrderContract = c.router(
       description: "Get order status",
       responses: Responses(OrderPlaceResponse),
     },
+    orders: {
+      path: "/orders",
+      method: "GET",
+      description: "Get all orders",
+      responses: Responses(
+        object({
+          running: z.number().array(),
+          orderQueues: z.number().array(),
+          lastOrderId: z.number(),
+        }).array()
+      ),
+    },
   },
   {
     baseHeaders,
