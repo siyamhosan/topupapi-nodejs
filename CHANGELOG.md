@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.2
+
+### Patch Changes
+
+- 13b2f2f: Orders Route added
+
 ## 0.5.1
 
 ### Patch Changes
