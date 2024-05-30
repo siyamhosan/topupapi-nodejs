@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.4
+
+### Patch Changes
+
+- 7eed4e7: Status Route
+
 ## 0.5.3
 
 ### Patch Changes
