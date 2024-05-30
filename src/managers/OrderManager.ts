@@ -73,7 +73,7 @@ export class OrderManager {
   }
 
   /**
-   * @description Fetches a single order status
+   * @description Fetches a single order status.
    */
   async status({ orderId }: { orderId: string }) {
     const res = await this._api.status({ params: { orderId } });
