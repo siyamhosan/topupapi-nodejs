@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.5
+
+### Patch Changes
+
+- c4695cc: Types Update
+
 ## 0.5.4
 
 ### Patch Changes
