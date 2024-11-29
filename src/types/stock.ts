@@ -6,6 +6,13 @@ export const UNIPIN_VOUCHER = object({
   serial: string()
 })
 
+export const UNIPIN_VOUCHERWITHID = object({
+  id: number(),
+  game: SupportedGame,
+  amount: number(),
+  serial: string()
+})
+
 export const UNIPIN_GIFT_CARD = object({
   amount: number(),
   serial: string()
@@ -75,7 +82,7 @@ export const StockUndoDto = object({
 
 export const StockAddResponse = object({
   quantity: number(),
-  codes: UNIPIN_VOUCHER.array()
+  codes: UNIPIN_VOUCHERWITHID.array(),
 })
 
 export const StockCheckResponse = object({
