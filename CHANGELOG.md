@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.5.6
+
+### Patch Changes
+
+- 1852bfe: StockAdd Response update | added id, game
+
 ## 0.5.5
 
 ### Patch Changes
