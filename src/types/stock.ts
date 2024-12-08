@@ -1,5 +1,5 @@
 import { array, boolean, literal, number, object, string, z } from "zod";
-import { StockType, SupportedGame } from "./init";
+import { StockType, SupportedGame, SupportedRegion } from "./init";
 
 export const UNIPIN_VOUCHER = object({
   amount: number(),
@@ -258,7 +258,7 @@ export const StockAccountsResponse = object({
 
 export const StockAccountDto = object({
   game: SupportedGame,
-  region: string(),
+  region: SupportedRegion,
   credentials: string(),
 });
 

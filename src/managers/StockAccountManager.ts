@@ -1,4 +1,5 @@
 import { BaseHeaders, StockAccountContract } from "@/api/contract";
+import { SupportedGame, SupportedRegion } from "@/types/init";
 import {
   StockAccountDto,
   StockAccountUpdateDto,
@@ -32,9 +33,33 @@ export class StockAccountManager {
   /**
    * @description Adds a new stock account
    */
-  async add(data: typeof StockAccountDto._type) {
+  async add(
+    data:
+      | typeof StockAccountDto._type
+      | {
+          game: typeof SupportedGame._type;
+          region: typeof SupportedRegion._type;
+          credentials: {
+            username: string;
+            password: string;
+            authcode: string;
+          };
+        }
+  ) {
+    let cString = "";
+
+    if (typeof data === "object" && typeof data.credentials === "object") {
+      cString = `${data.credentials.username}:${data.credentials.password}:${data.credentials.authcode}`;
+    } else {
+      cString = data.credentials as string;
+    }
+
     const res = await this._api.add({
-      body: data,
+      body: {
+        game: data.game,
+        region: data.region,
+        credentials: cString,
+      },
     });
 
     if (res.status === 200 || res.status === 201) {

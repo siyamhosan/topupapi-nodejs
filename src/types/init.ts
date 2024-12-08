@@ -8,3 +8,6 @@ export const StockType = z.enum(StockTypes);
 
 export const SupportedGames = ["FREE_FIRE"] as const;
 export const SupportedGame = z.enum(SupportedGames);
+
+export const SupportedRegions = ["MY", "SG", "ID"] as const;
+export const SupportedRegion = z.enum(SupportedRegions);

@@ -23,6 +23,8 @@ import {
   SupportedGames,
   UserRole,
   UserRoles,
+  SupportedRegion,
+  SupportedRegions,
 } from "@/types/init";
 import {
   Node,
@@ -187,6 +189,8 @@ export {
   ShardContract,
   StockAccountContract,
   StockAccountManager,
+  SupportedRegion,
+  SupportedRegions,
 };
 
 export default TopUpClient;
