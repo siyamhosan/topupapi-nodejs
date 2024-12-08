@@ -7,6 +7,13 @@ import {
   OrderStatusResponse,
 } from "@/types/order";
 import {
+  StockAccountAddResponse,
+  StockAccountDeleteDto,
+  StockAccountDeleteResponse,
+  StockAccountDto,
+  StockAccountsResponse,
+  StockAccountUpdateDto,
+  StockAccountUpdateResponse,
   StockAddDto,
   StockAddResponse,
   StockBuyDto,
@@ -123,6 +130,44 @@ export const StockContract = c.router(
   {
     baseHeaders,
     pathPrefix: "/stock",
+  }
+);
+
+// In contract.ts, add this to StockAccountContract:
+
+export const StockAccountContract = c.router(
+  {
+    fetch: {
+      path: "/",
+      method: "GET",
+      description: "Get all stock accounts",
+      responses: Responses(StockAccountsResponse),
+    },
+    add: {
+      path: "/add",
+      method: "POST",
+      body: StockAccountDto,
+      description: "Add new stock account",
+      responses: Responses(StockAccountAddResponse),
+    },
+    update: {
+      path: "/update",
+      method: "PATCH",
+      body: StockAccountUpdateDto,
+      description: "Update stock account",
+      responses: Responses(StockAccountUpdateResponse),
+    },
+    delete: {
+      path: "/delete",
+      method: "DELETE",
+      body: StockAccountDeleteDto,
+      description: "Delete stock account",
+      responses: Responses(StockAccountDeleteResponse),
+    },
+  },
+  {
+    baseHeaders,
+    pathPrefix: "/stock/account",
   }
 );
 

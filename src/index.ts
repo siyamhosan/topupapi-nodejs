@@ -5,11 +5,14 @@ import {
   StockContract,
   UserContract,
   StockPriceContract,
+  ShardContract,
+  StockAccountContract,
 } from "@/api/contract";
 import { TopUpClient, TopUpClientConfig } from "@/client/TopupClient";
 import { NodeManager } from "@/managers/NodeManager";
 import { OrderManager } from "@/managers/OrderManager";
 import { StockManager } from "@/managers/StockManager";
+import { StockAccountManager } from "@/managers/StockAccountManager";
 import { StockPriceManager } from "@/managers/StockPriceManager";
 import { UserManager } from "@/managers/UserManager";
 import { ShardManager } from "./managers/ShardManager";
@@ -60,6 +63,14 @@ import {
   StockAddOptions,
   StockFetchResponse,
   StockMapObj,
+  StockAccountAddResponse,
+  StockAccountDeleteDto,
+  StockAccountDeleteResponse,
+  StockAccountDto,
+  StockAccountUpdateDto,
+  StockAccountUpdateResponse,
+  StockAccountsResponse,
+  UNIPIN_VOUCHERWITHID,
 } from "@/types/stock";
 import {
   FormattedStockPrice,
@@ -165,6 +176,17 @@ export {
   sequenceSchema,
   sequenceStateSchema,
   userSchema,
+  StockAccountAddResponse,
+  StockAccountDeleteDto,
+  StockAccountDeleteResponse,
+  StockAccountDto,
+  StockAccountUpdateDto,
+  StockAccountUpdateResponse,
+  StockAccountsResponse,
+  UNIPIN_VOUCHERWITHID,
+  ShardContract,
+  StockAccountContract,
+  StockAccountManager,
 };
 
 export default TopUpClient;

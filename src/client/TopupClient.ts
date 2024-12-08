@@ -2,6 +2,7 @@ import { API_URL } from "@/config";
 import { NodeManager } from "@/managers/NodeManager";
 import { OrderManager } from "@/managers/OrderManager";
 import { ShardManager } from "@/managers/ShardManager";
+import { StockAccountManager } from "@/managers/StockAccountManager";
 import { StockManager } from "@/managers/StockManager";
 import { StockPriceManager } from "@/managers/StockPriceManager";
 import { UserManager } from "@/managers/UserManager";
@@ -18,6 +19,7 @@ export class TopUpClient {
   private _baseUrl: string;
 
   public stocks;
+  public stockAccounts;
   public stockPrices;
   public users;
   public orders;
@@ -54,6 +56,10 @@ export class TopUpClient {
       token: this._token,
     });
     this.shards = new ShardManager({
+      baseUrl: this._baseUrl,
+      token: this._token,
+    });
+    this.stockAccounts = new StockAccountManager({
       baseUrl: this._baseUrl,
       token: this._token,
     });
