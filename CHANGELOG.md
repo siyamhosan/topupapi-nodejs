@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.2
+
+### Patch Changes
+
+- 5d3bd91: Type Fx
+
 ## 0.6.1
 
 ### Patch Changes
