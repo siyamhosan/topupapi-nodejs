@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.1
+
+### Patch Changes
+
+- 2ed9bb4: Bug Fixes
+
 ## 0.6.0
 
 ### Minor Changes
