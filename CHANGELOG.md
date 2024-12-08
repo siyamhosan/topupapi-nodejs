@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.0
+
+### Minor Changes
+
+- de121ee: Added Stock Account Management
+
 ## 0.5.6
 
 ### Patch Changes
