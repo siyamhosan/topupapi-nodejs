@@ -83,7 +83,7 @@ export class OrderManager {
         res = await this._api.fetch({
           params: { orderId: options.orderId.toString() },
         });
-      } else if ("page" in options && "limit" in options) {
+      } else if ("offset" in options && "limit" in options) {
         res = await this._api.query({
           query: {
             limit: options.limit,
