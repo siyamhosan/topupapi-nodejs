@@ -218,7 +218,7 @@ export const OrderContract = c.router(
       responses: Responses(OrderStatusResponse),
     },
     query: {
-      path: "/",
+      path: "",
       method: "GET",
       description: "Get all orders",
       query: OrderQuearyDto,
