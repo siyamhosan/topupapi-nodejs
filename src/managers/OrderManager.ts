@@ -87,7 +87,7 @@ export class OrderManager {
         res = await this._api.query({
           query: {
             limit: options.limit,
-            page: options.page,
+            offset: options.offset,
           },
         });
       }

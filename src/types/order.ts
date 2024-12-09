@@ -124,7 +124,7 @@ export const OrderFetchResponse = z.object({
 });
 
 export const OrderQuearyDto = object({
-  page: number(),
+  offset: number(),
   limit: number(),
 });
 
