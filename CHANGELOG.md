@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.5
+
+### Patch Changes
+
+- c8f6f6d: Page -> Offset
+
 ## 0.6.4
 
 ### Patch Changes
