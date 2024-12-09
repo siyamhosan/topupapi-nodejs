@@ -45,6 +45,9 @@ import {
   sequenceSchema,
   sequenceStateSchema,
   userSchema,
+  OrderFetchResponse,
+  OrderQuearyDto,
+  OrderQuearyResponse,
 } from "@/types/order";
 import {
   FormattedStock,
@@ -191,6 +194,9 @@ export {
   StockAccountManager,
   SupportedRegion,
   SupportedRegions,
+  OrderFetchResponse,
+  OrderQuearyDto,
+  OrderQuearyResponse,
 };
 
 export default TopUpClient;

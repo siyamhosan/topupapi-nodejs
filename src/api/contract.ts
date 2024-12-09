@@ -4,6 +4,8 @@ import {
   OrderCombinationBarkerResponse,
   OrderPlaceResponse,
   OrderPostDto,
+  OrderQuearyDto,
+  OrderQuearyResponse,
   OrderStatusResponse,
 } from "@/types/order";
 import {
@@ -206,6 +208,22 @@ export const StockPriceContract = c.router(
 
 export const OrderContract = c.router(
   {
+    fetch: {
+      path: "/:orderId",
+      method: "GET",
+      pathParams: z.object({
+        orderId: z.string(),
+      }),
+      description: "Get order by id",
+      responses: Responses(OrderStatusResponse),
+    },
+    query: {
+      path: "/",
+      method: "GET",
+      description: "Get all orders",
+      query: OrderQuearyDto,
+      responses: Responses(OrderQuearyResponse),
+    },
     place: {
       path: "/",
       method: "POST",

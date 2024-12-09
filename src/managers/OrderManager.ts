@@ -1,5 +1,9 @@
 import { BaseHeaders, OrderContract } from "@/api/contract";
-import { OrderCombinationBarkerPostDto, OrderPostDto } from "@/types/order";
+import {
+  OrderCombinationBarkerPostDto,
+  OrderPostDto,
+  OrderQuearyDto,
+} from "@/types/order";
 import { initClient } from "@ts-rest/core";
 
 export class OrderManager {
@@ -62,8 +66,37 @@ export class OrderManager {
   /**
    * @description Fetches all orders
    */
-  async fetch() {
-    const res = await this._api.orders();
+  async fetch(
+    options:
+      | string
+      | number
+      | { orderId: string | number }
+      | typeof OrderQuearyDto._type
+  ) {
+    let res;
+    if (!options) {
+      res = await this._api.orders();
+    } else if (typeof options === "string" || typeof options === "number") {
+      res = await this._api.fetch({ params: { orderId: options.toString() } });
+    } else if (typeof options === "object") {
+      if ("orderId" in options) {
+        res = await this._api.fetch({
+          params: { orderId: options.orderId.toString() },
+        });
+      } else if ("page" in options && "limit" in options) {
+        res = await this._api.query({
+          query: {
+            limit: options.limit,
+            page: options.page,
+          },
+        });
+      }
+    }
+
+    if (!res) {
+      return null;
+    }
+
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {

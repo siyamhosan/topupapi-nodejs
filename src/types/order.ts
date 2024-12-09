@@ -118,3 +118,17 @@ export const OrderStatusResponse = z.object({
   errorCode: z.string(),
   data: orderStatusObj,
 });
+
+export const OrderFetchResponse = z.object({
+  order: orderSchema,
+});
+
+export const OrderQuearyDto = object({
+  page: number(),
+  limit: number(),
+});
+
+export const OrderQuearyResponse = z.object({
+  totalCount: number(),
+  orders: orderSchema.array(),
+});
