@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.6
+
+### Patch Changes
+
+- 4749c0b: Bug Fix
+
 ## 0.6.5
 
 ### Patch Changes
