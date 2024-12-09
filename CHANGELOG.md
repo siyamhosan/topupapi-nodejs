@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.6.4
+
+### Patch Changes
+
+- 94826fd: Bug Fixes on Order Fetch
+
 ## 0.6.3
 
 ### Patch Changes
