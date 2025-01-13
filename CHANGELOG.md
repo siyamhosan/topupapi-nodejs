@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.7.1
+
+### Patch Changes
+
+- d2091be: Type Fix
+
 ## 0.7.0
 
 ### Minor Changes
