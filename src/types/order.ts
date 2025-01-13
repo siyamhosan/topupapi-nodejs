@@ -132,7 +132,7 @@ export const OrderQuearyDto = object({
   game: string().optional(),
   uid: string().optional(),
   state: z
-    .enum(["0", "1", "2", "3", "4"])
+    .enum(["0", "99"])
     .optional()
     .transform((val) => (val ? parseInt(val) : undefined)),
 });
