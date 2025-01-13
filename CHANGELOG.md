@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.7.0
+
+### Minor Changes
+
+- bbda5ec: Added AutoOrder in UserUpdate | Fixed Stock Price Get/Set/Delete routes and types
+
 ## 0.6.6
 
 ### Patch Changes
