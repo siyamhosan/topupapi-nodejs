@@ -7,7 +7,7 @@ import {
   StockUndoDto,
 } from "@/types/stock";
 import { initClient } from "@ts-rest/core";
-import { SupportedGame } from "..";
+import { StockPriceManager, SupportedGame } from "..";
 import { StockAccountManager } from "./StockAccountManager";
 
 export interface StockFetchOptions {
@@ -18,6 +18,7 @@ export class StockManager {
   private _api;
 
   public accounts: StockAccountManager;
+  public price: StockPriceManager;
 
   constructor({ baseUrl, token }: { baseUrl: string; token: string }) {
     this._api = initClient(StockContract, {
@@ -25,6 +26,7 @@ export class StockManager {
       baseUrl,
     });
     this.accounts = new StockAccountManager({ baseUrl, token });
+    this.price = new StockPriceManager({ baseUrl, token });
   }
 
   /**

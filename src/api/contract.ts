@@ -30,6 +30,7 @@ import {
 } from "@/types/stock";
 import {
   StockPriceFetchResponse,
+  StockPriceSetDeleteDto,
   StockPriceSetResponse,
   StockPriceSetUpdateDto,
   StockPriceUpdateResponse,
@@ -42,6 +43,7 @@ import {
   User,
   UserRegisterDto,
   UserRegisterResponse,
+  UserUpdateDto,
 } from "@/types/user";
 import { initContract } from "@ts-rest/core";
 import { object, z } from "zod";
@@ -199,6 +201,13 @@ export const StockPriceContract = c.router(
       description: "Update stock price",
       responses: Responses(StockPriceUpdateResponse),
     },
+    delete: {
+      path: "/",
+      method: "DELETE",
+      body: StockPriceSetDeleteDto,
+      description: "Delete stock price",
+      responses: Responses(StockPriceUpdateResponse),
+    },
   },
   {
     baseHeaders,
@@ -314,6 +323,13 @@ export const UserContract = c.router(
       body: UserRegisterDto,
       description: "Register new user",
       responses: Responses(UserRegisterResponse),
+    },
+    update: {
+      path: "/",
+      method: "PATCH",
+      description: "Update user info",
+      body: UserUpdateDto,
+      responses: Responses(User),
     },
     fetchMerchants: {
       path: "/merchant",

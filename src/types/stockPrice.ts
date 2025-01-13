@@ -8,6 +8,11 @@ export const StockPriceSetUpdateDto = object({
   note: string().optional(),
 });
 
+export const StockPriceSetDeleteDto = object({
+  game: SupportedGame,
+  amount: number(),
+});
+
 /**
  *   {
                 "id": 3,

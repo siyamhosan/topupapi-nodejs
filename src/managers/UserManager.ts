@@ -5,6 +5,7 @@ import {
   MerchantRemoveDto,
   MerchantUpdateDto,
   UserRegisterDto,
+  UserUpdateDto,
 } from "@/types/user";
 
 export class UserManager {
@@ -39,6 +40,32 @@ export class UserManager {
     const res = await this._api.register({
       body: {
         name,
+      },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
+   * @description Update the user's profile
+   */
+  async update({
+    userId,
+    name,
+    subscriptionLevel,
+    autoOrder,
+  }: typeof UserUpdateDto._type) {
+    const res = await this._api.update({
+      body: {
+        userId,
+        name,
+        subscriptionLevel,
+        autoOrder,
       },
     });
 

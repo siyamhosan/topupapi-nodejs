@@ -66,31 +66,24 @@ export class OrderManager {
   /**
    * @description Fetches all orders
    */
-  async fetch(
-    options:
-      | string
-      | number
-      | { orderId: string | number }
-      | typeof OrderQuearyDto._type
-  ) {
+  async fetch(options: string | number | typeof OrderQuearyDto._type) {
     let res;
     if (!options) {
       res = await this._api.orders();
     } else if (typeof options === "string" || typeof options === "number") {
       res = await this._api.fetch({ params: { orderId: options.toString() } });
     } else if (typeof options === "object") {
-      if ("orderId" in options) {
-        res = await this._api.fetch({
-          params: { orderId: options.orderId.toString() },
-        });
-      } else if ("offset" in options && "limit" in options) {
-        res = await this._api.query({
-          query: {
-            limit: options.limit,
-            offset: options.offset,
-          },
-        });
-      }
+      res = await this._api.query({
+        query: {
+          offset: options.offset,
+          limit: options.limit,
+          orderId: options.orderId,
+          userId: options.userId,
+          game: options.game,
+          uid: options.uid,
+          state: options.state as any,
+        },
+      });
     }
 
     if (!res) {

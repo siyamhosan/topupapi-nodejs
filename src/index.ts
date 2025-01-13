@@ -85,6 +85,7 @@ import {
   StockPriceSetResponse,
   StockPriceSetUpdateDto,
   StockPriceUpdateResponse,
+  StockPriceSetDeleteDto,
 } from "@/types/stockPrice";
 import {
   Merchant,
@@ -94,6 +95,7 @@ import {
   User,
   UserRegisterDto,
   UserRegisterResponse,
+  UserUpdateDto,
 } from "@/types/user";
 import {
   OrderCallbackPayload,
@@ -197,6 +199,8 @@ export {
   OrderFetchResponse,
   OrderQuearyDto,
   OrderQuearyResponse,
+  StockPriceSetDeleteDto,
+  UserUpdateDto,
 };
 
 export default TopUpClient;

@@ -126,6 +126,15 @@ export const OrderFetchResponse = z.object({
 export const OrderQuearyDto = object({
   offset: number(),
   limit: number(),
+
+  orderId: string().optional(),
+  userId: string().optional(),
+  game: string().optional(),
+  uid: string().optional(),
+  state: z
+    .enum(["0", "1", "2", "3", "4"])
+    .optional()
+    .transform((val) => (val ? parseInt(val) : undefined)),
 });
 
 export const OrderQuearyResponse = z.object({

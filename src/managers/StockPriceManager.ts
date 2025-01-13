@@ -1,96 +1,115 @@
-import { BaseHeaders, StockPriceContract } from '@/api/contract'
+import { BaseHeaders, StockPriceContract } from "@/api/contract";
 import {
   StockAddOptions,
   StockBuyDto,
   StockCheckDto,
   StockRefundDto,
-  StockUndoDto
-} from '@/types/stock'
-import { initClient } from '@ts-rest/core'
-import { SupportedGame } from '..'
-import { StockPriceSetUpdateDto } from '@/types/stockPrice'
+  StockUndoDto,
+} from "@/types/stock";
+import { initClient } from "@ts-rest/core";
+import { SupportedGame } from "..";
+import { StockPriceSetUpdateDto } from "@/types/stockPrice";
 
 export interface StockPriceFetchOptions {
-  game?: typeof SupportedGame._type
-  amount?: number
+  game?: typeof SupportedGame._type;
+  amount?: number;
 }
 
 export class StockPriceManager {
-  private _api
+  private _api;
 
-  constructor ({ baseUrl, token }: { baseUrl: string; token: string }) {
+  constructor({ baseUrl, token }: { baseUrl: string; token: string }) {
     this._api = initClient(StockPriceContract, {
       baseHeaders: BaseHeaders({ token }),
-      baseUrl
-    })
+      baseUrl,
+    });
   }
 
   /**
    *
    * @description Fetches all current stock prices
    */
-  async fetch (otp?: StockPriceFetchOptions) {
+  async fetch(otp?: StockPriceFetchOptions) {
     const res = await this._api.fetch({
-      query: otp
-    })
+      query: otp,
+    });
 
     if (res.status === 200 || res.status === 201) {
-      return res.body.data
+      return res.body.data;
     } else {
-      throw res.body
-      return null
+      throw res.body;
+      return null;
     }
   }
 
   /**
    * @description Adds a new stock price
    */
-  async create ({
+  async create({
     price,
     amount,
     note,
-    game
+    game,
   }: typeof StockPriceSetUpdateDto._type) {
     const res = await this._api.set({
       body: {
         price,
         amount,
         note,
-        game
-      }
-    })
+        game,
+      },
+    });
 
     if (res.status === 200 || res.status === 201) {
-      return res.body.data
+      return res.body.data;
     } else {
-      throw res.body
-      return null
+      throw res.body;
+      return null;
     }
   }
 
   /**
    * @description Updates a stock price
    */
-  async update ({
+  async update({
     price,
     amount,
     note,
-    game
+    game,
   }: typeof StockPriceSetUpdateDto._type) {
     const res = await this._api.update({
       body: {
         amount,
         price,
         note,
-        game
-      }
-    })
+        game,
+      },
+    });
 
     if (res.status === 200 || res.status === 201 || res.status === 404) {
-      return res.body.data
+      return res.body.data;
     } else {
-      throw res.body
-      return null
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
+   * @description Deletes a stock price
+   */
+  async delete({ game, amount }: typeof StockPriceSetUpdateDto._type) {
+    const res = await this._api.delete({
+      body: {
+        game,
+        amount,
+      },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
     }
   }
 }
