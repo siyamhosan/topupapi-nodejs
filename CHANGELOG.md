@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.8.0
+
+### Minor Changes
+
+- b0f881d: StockAPI Update
+
 ## 0.7.1
 
 ### Patch Changes
