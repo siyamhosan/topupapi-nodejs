@@ -86,8 +86,10 @@ export const StockAddResponse = object({
 });
 
 export const StockCheckResponse = object({
-  available: z.boolean(),
-  missing: number().array(),
+  available: boolean(),
+  missing: object({
+    [string()._type]: number(),
+  }).nullable(),
 });
 
 export const StockRefundResponse = object({
@@ -101,141 +103,6 @@ export const StockUndoResponse = object({
   type: z.enum(StockUndoTypes),
 });
 
-export const StockMapObj = object({
-  [SupportedGame._type]: object({
-    [string()._type]: object({
-      amount: number(),
-      stockLen: number(),
-      stockIds: array(number()),
-      usedAsBackupIds: array(number()),
-    }),
-  }),
-});
-
-export const StockFetchResponse = object({
-  stocks: StockMapObj,
-});
-
-export const StockBuyResponse = {
-  200: object({
-    statusCode: number(),
-    data: object({
-      available: boolean(),
-      quantity: number(),
-      codes: object({
-        code: object({
-          amount: number(),
-          serial: string(),
-        }),
-        codeType: StockType,
-        game: SupportedGame,
-      }).array(),
-    }),
-  }),
-  201: object({
-    statusCode: number(),
-    data: object({
-      available: boolean(),
-      quantity: number(),
-      codes: object({
-        code: object({
-          amount: number(),
-          serial: string(),
-        }),
-        codeType: StockType,
-        game: SupportedGame,
-      }).array(),
-    }),
-  }),
-  404: object({
-    statusCode: number(),
-    message: string().array(),
-    data: object({
-      missing: number().array(),
-      available: boolean(),
-    }),
-  }),
-};
-
-/**
- * {
-    "data": {
-        "stockAccounts": [
-            {
-                "accountType": "GARENA_SHELL",
-                "active": false,
-                "id": 4,
-                "game": "FREE_FIRE_SHELL",
-                "lastBalance": null,
-                "region": "MY",
-                "owner": 1,
-                "updatedAt": "2024-11-25T18:43:46.828Z",
-                "createdAt": "2024-11-25T22:38:00.425Z",
-                "credentials": {
-                    "username": "MR777BOU"
-                }
-            },
-            {
-                "accountType": "GARENA_SHELL",
-                "active": true,
-                "id": 8,
-                "game": "FREE_FIRE_ID",
-                "lastBalance": 1515,
-                "region": "ID",
-                "owner": 1,
-                "updatedAt": "2024-12-06T11:36:09.359Z",
-                "createdAt": "2024-12-04T22:21:10.538Z",
-                "credentials": {
-                    "username": "Mausm3456565"
-                }
-            },
-            {
-                "accountType": "GARENA_SHELL",
-                "active": true,
-                "id": 5,
-                "game": "FREE_FIRE_SHELL",
-                "lastBalance": 23555,
-                "region": "MY",
-                "owner": 1,
-                "updatedAt": "2024-12-03T14:58:37.120Z",
-                "createdAt": "2024-11-25T23:05:20.403Z",
-                "credentials": {
-                    "username": "MR777BOU"
-                }
-            },
-            {
-                "accountType": "GARENA_SHELL",
-                "active": true,
-                "id": 6,
-                "game": "FREE_FIRE_SG",
-                "lastBalance": 343,
-                "region": "SG",
-                "owner": 1,
-                "updatedAt": "2024-12-08T22:35:32.036Z",
-                "createdAt": "2024-12-04T18:20:10.128Z",
-                "credentials": {
-                    "username": "Abutalha990"
-                }
-            },
-            {
-                "accountType": "GARENA_SHELL",
-                "active": false,
-                "id": 7,
-                "game": "FREE_FIRE_ID",
-                "lastBalance": 1527,
-                "region": "ID",
-                "owner": 1,
-                "updatedAt": "2024-12-04T22:24:29.292Z",
-                "createdAt": "2024-12-04T19:25:08.720Z",
-                "credentials": {
-                    "username": "Mausm3456565"
-                }
-            }
-        ]
-    },
-    "statusCode": 200
-}
- */
 export const StockAccountsResponse = object({
   statusCode: number(),
   data: object({
@@ -256,39 +123,68 @@ export const StockAccountsResponse = object({
   }),
 });
 
+export const StockMapObj = object({
+  [SupportedGame._type]: object({
+    [string()._type]: number(),
+  }),
+});
+
+export const StockFetchResponse = object({
+  stocks: StockMapObj,
+  stockAccounts: StockAccountsResponse.shape.data.shape.stockAccounts,
+});
+
+export const StockBuyResponse = {
+  200: object({
+    statusCode: number(),
+    data: object({
+      available: boolean(),
+      quantity: number(),
+      codes: object({
+        id: number(),
+        code: object({
+          amount: number(),
+          serial: string(),
+        }),
+        codeType: StockType,
+        game: SupportedGame,
+      }).array(),
+    }),
+  }),
+  201: object({
+    statusCode: number(),
+    data: object({
+      available: boolean(),
+      quantity: number(),
+      codes: object({
+        id: number(),
+        code: object({
+          amount: number(),
+          serial: string(),
+        }),
+        codeType: StockType,
+        game: SupportedGame,
+      }).array(),
+    }),
+  }),
+  404: object({
+    statusCode: number(),
+    message: string().array(),
+    data: object({
+      missing: object({
+        [string()._type]: number(),
+      }),
+      available: boolean(),
+    }),
+  }),
+};
+
 export const StockAccountDto = object({
   game: SupportedGame,
   region: SupportedRegion,
   credentials: string(),
 });
 
-/**
- * {
-    "data": {
-        "quantity": 1,
-        "codes": [
-            {
-                "id": 9,
-                "owner": 1,
-                "game": "FREE_FIRE_ID",
-                "active": true,
-                "accountType": "GARENA_SHELL",
-                "credentials": {
-                    "username": "username",
-                    "password": "password+",
-                    "authCode": "authcode"
-                },
-                "region": "ID",
-                "checkCode": "1:ID:username:password+:authcode",
-                "lastBalance": null,
-                "createdAt": "2024-12-08T22:45:02.085Z",
-                "updatedAt": "2024-12-08T22:45:02.085Z"
-            }
-        ]
-    },
-    "statusCode": 200
-}
- */
 export const StockAccountAddResponse = object({
   statusCode: number(),
   data: object({
@@ -318,31 +214,6 @@ export const StockAccountUpdateDto = object({
   active: boolean(),
 });
 
-/**{
-    "data": {
-        "message": [
-            "Stock Account updated successfully"
-        ],
-        "stockAccount": [
-            {
-                "id": 9,
-                "owner": 1,
-                "game": "FREE_FIRE_ID",
-                "active": true,
-                "accountType": "GARENA_SHELL",
-                "credentials": {
-                    "username": "username"
-                },
-                "region": "ID",
-                "checkCode": "1:ID:username",
-                "lastBalance": null,
-                "createdAt": "2024-12-08T22:45:02.085Z",
-                "updatedAt": "2024-12-08T22:45:39.761Z"
-            }
-        ]
-    },
-    "statusCode": 200
-} */
 export const StockAccountUpdateResponse = object({
   statusCode: number(),
   data: object({

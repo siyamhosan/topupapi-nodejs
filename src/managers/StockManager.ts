@@ -30,24 +30,23 @@ export class StockManager {
   }
 
   /**
-   *
-   * @description Fetches all current stocks
+   * Fetches all current stocks
+   * @returns Object containing stocks by game and amount, with counts instead of individual stock IDs
    */
-  async fetch(otp?: StockFetchOptions) {
+  async fetch(opt?: StockFetchOptions) {
     const res = await this._api.fetch({
-      query: otp,
+      query: opt,
     });
 
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {
-      throw res.body;
-      return null;
+      throw new Error(`Failed to fetch stocks: ${JSON.stringify(res.body)}`);
     }
   }
 
   /**
-   * @description Adds a new stock
+   * Adds a new stock
    */
   async add({ price, amount, codeTxt, game }: StockAddOptions) {
     if (typeof price === "number") price = price.toString();
@@ -64,13 +63,13 @@ export class StockManager {
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {
-      throw res.body;
-      return null;
+      throw new Error(`Failed to add stock: ${JSON.stringify(res.body)}`);
     }
   }
 
   /**
-   * @description Checks if the stock is available
+   * Checks if the stock is available
+   * @returns Object containing availability status and missing stock counts if any
    */
   async check({ combination, game, quantity = 1 }: typeof StockCheckDto._type) {
     const res = await this._api.check({
@@ -84,13 +83,15 @@ export class StockManager {
     if (res.status === 200 || res.status === 201 || res.status === 404) {
       return res.body.data;
     } else {
-      throw res.body;
-      return null;
+      throw new Error(
+        `Failed to check stock availability: ${JSON.stringify(res.body)}`
+      );
     }
   }
 
   /**
-   * @description Buys a stock
+   * Buys a stock using atomic Redis operations
+   * @returns Object containing purchased stock details or error with missing stock information
    */
   async buy({ combination, game, quantity = 1 }: typeof StockBuyDto._type) {
     const res = await this._api.buy({
@@ -103,14 +104,17 @@ export class StockManager {
 
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
+    } else if (res.status === 404) {
+      // Handle case where stock is not available
+      const error = res.body.data;
+      throw new Error(`Stock not available: ${JSON.stringify(error.missing)}`);
     } else {
-      throw res.body;
-      return null;
+      throw new Error(`Failed to buy stock: ${JSON.stringify(res.body)}`);
     }
   }
 
   /**
-   * @description Refunds a stock after buying
+   * Refunds a stock after buying
    */
   async refund({ checkCode, game }: typeof StockRefundDto._type) {
     const res = await this._api.refund({
@@ -123,13 +127,12 @@ export class StockManager {
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {
-      throw res.body;
-      return null;
+      throw new Error(`Failed to refund stock: ${JSON.stringify(res.body)}`);
     }
   }
 
   /**
-   * @description Undo a task
+   * Undo a task
    */
   async undo({ type }: typeof StockUndoDto._type) {
     const res = await this._api.undo({
@@ -141,8 +144,7 @@ export class StockManager {
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
     } else {
-      throw res.body;
-      return null;
+      throw new Error(`Failed to undo task: ${JSON.stringify(res.body)}`);
     }
   }
 }
