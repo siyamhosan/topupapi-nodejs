@@ -402,6 +402,17 @@ export const ShardContract = c.router(
         })
       ),
     },
+    unStuck: {
+      path: "/unstuck/:name",
+      pathParams: z.object({ name: z.string() }),
+      body: object({}),
+      method: "POST",
+      responses: Responses(
+        object({
+          success: z.boolean(),
+        })
+      ),
+    },
     strikes: {
       path: "/strike",
       method: "GET",

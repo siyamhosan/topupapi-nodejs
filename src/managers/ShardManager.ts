@@ -84,6 +84,25 @@ export class ShardManager {
   }
 
   /**
+   * @description Unstuck a node
+   * @param name
+   * @returns
+   */
+  async unStuck(name: string) {
+    const res = await this._api.unStuck({
+      params: { name },
+      body: {},
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw res.body;
+      return null;
+    }
+  }
+
+  /**
    * @description Strikes
    * @returns
    */
