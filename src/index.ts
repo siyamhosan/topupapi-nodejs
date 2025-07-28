@@ -76,6 +76,8 @@ import {
   StockAccountUpdateResponse,
   StockAccountsResponse,
   UNIPIN_VOUCHERWITHID,
+  StockPinResponse,
+  StockFullResponse,
 } from "@/types/stock";
 import {
   FormattedStockPrice,
@@ -201,6 +203,8 @@ export {
   OrderQuearyResponse,
   StockPriceSetDeleteDto,
   UserUpdateDto,
+  StockPinResponse,
+  StockFullResponse,
 };
 
 export default TopUpClient;

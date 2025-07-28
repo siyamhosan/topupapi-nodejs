@@ -147,4 +147,37 @@ export class StockManager {
       throw new Error(`Failed to undo task: ${JSON.stringify(res.body)}`);
     }
   }
+
+  /**
+   * Save stock pin
+   * pin must be atleast 4 characters long
+   */
+  async savePin(pin: string) {
+    const res = await this._api.pin({
+      body: {},
+      headers: { "x-stock-pin": pin },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw new Error(`Failed to save stock pin: ${JSON.stringify(res.body)}`);
+    }
+  }
+
+  /**
+   * Get full stocks of the user
+   */
+  async getFullStocks(pin: string) {
+    const res = await this._api.full({
+      body: {},
+      headers: { "x-stock-pin": pin },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    } else {
+      throw new Error(`Failed to get full stocks: ${JSON.stringify(res.body)}`);
+    }
+  }
 }

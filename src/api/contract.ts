@@ -23,6 +23,8 @@ import {
   StockCheckDto,
   StockCheckResponse,
   StockFetchResponse,
+  StockFullResponse,
+  StockPinResponse,
   StockRefundDto,
   StockRefundResponse,
   StockUndoDto,
@@ -129,6 +131,24 @@ export const StockContract = c.router(
       method: "PATCH",
       body: StockUndoDto,
       responses: Responses(StockUndoResponse),
+    },
+    pin: {
+      path: "/pin",
+      method: "POST",
+      headers: z.object({
+        "x-stock-pin": z.string(),
+      }),
+      body: z.object({}),
+      responses: Responses(StockPinResponse),
+    },
+    full: {
+      path: "/full",
+      method: "POST",
+      headers: z.object({
+        "x-stock-pin": z.string(),
+      }),
+      body: z.object({}),
+      responses: Responses(StockFullResponse),
     },
   },
   {
