@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.9.0
+
+### Minor Changes
+
+- b02a54f: Added Get Full Stock Functions api with PIN security!
+
 ## 0.8.1
 
 ### Patch Changes
