@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.10.1
+
+### Patch Changes
+
+- cf5df5b: Ship type declarations and ESM build in the published package
+
 ## 0.10.0
 
 ### Minor Changes
