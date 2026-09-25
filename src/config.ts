@@ -1,1 +1,1 @@
-export const API_URL = 'https://ta.bazarexchange.ltd'
+export const API_URL = 'https://api.t4b.top'
