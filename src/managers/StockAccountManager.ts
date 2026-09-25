@@ -1,4 +1,4 @@
-import { BaseHeaders, StockAccountContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, StockAccountContract } from "@/api/contract";
 import { SupportedGame, SupportedRegion } from "@/types/init";
 import {
   StockAccountDto,
@@ -14,6 +14,7 @@ export class StockAccountManager {
     this._api = initClient(StockAccountContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
   }
 

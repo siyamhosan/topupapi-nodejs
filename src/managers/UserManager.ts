@@ -1,4 +1,4 @@
-import { BaseHeaders, UserContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, UserContract } from "@/api/contract";
 import { initClient } from "@ts-rest/core";
 import {
   MerchantRegisterDto,
@@ -15,6 +15,7 @@ export class UserManager {
     this._api = initClient(UserContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
   }
 

@@ -1,4 +1,4 @@
-import { BaseHeaders, StockContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, StockContract } from "@/api/contract";
 import {
   StockAddOptions,
   StockBuyDto,
@@ -24,6 +24,7 @@ export class StockManager {
     this._api = initClient(StockContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
     this.accounts = new StockAccountManager({ baseUrl, token });
     this.price = new StockPriceManager({ baseUrl, token });

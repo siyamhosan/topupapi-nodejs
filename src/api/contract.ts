@@ -47,7 +47,7 @@ import {
   UserRegisterResponse,
   UserUpdateDto,
 } from "@/types/user";
-import { initContract } from "@ts-rest/core";
+import { ApiFetcher, initContract, tsRestFetchApi } from "@ts-rest/core";
 import { object, z } from "zod";
 import { SupportedGame } from "..";
 import { ShardHealth } from "@/types/shard";
@@ -89,6 +89,14 @@ export const BaseHeaders = ({ token }: { token: string }) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",
 });
+
+export const REQUEST_TIMEOUT_MS = 15_000;
+
+export const fetchApi: ApiFetcher = (args) =>
+  tsRestFetchApi({
+    ...args,
+    signal: args.signal ?? AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  });
 
 export const StockContract = c.router(
   {
@@ -243,7 +251,7 @@ export const OrderContract = c.router(
       pathParams: z.object({
         orderId: z.string(),
       }),
-      description: "Get order by id",
+      description: "Get order by id or idempotency key",
       responses: Responses(OrderStatusResponse),
     },
     query: {

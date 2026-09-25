@@ -1,4 +1,4 @@
-import { BaseHeaders, OrderContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, OrderContract } from "@/api/contract";
 import {
   OrderCombinationBarkerPostDto,
   OrderPostDto,
@@ -13,6 +13,7 @@ export class OrderManager {
     this._api = initClient(OrderContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
   }
 
@@ -25,6 +26,7 @@ export class OrderManager {
     game,
     quantity = 1,
     uid,
+    idempotencyKey,
   }: typeof OrderPostDto._type) {
     const res = await this._api.place({
       body: {
@@ -33,6 +35,7 @@ export class OrderManager {
         game,
         quantity,
         uid,
+        idempotencyKey,
       },
     });
 
@@ -64,7 +67,7 @@ export class OrderManager {
   }
 
   /**
-   * @description Fetches all orders
+   * @description Fetches all orders, or a single order by id or idempotency key
    */
   async fetch(options: string | number | typeof OrderQuearyDto._type) {
     let res;
@@ -78,6 +81,7 @@ export class OrderManager {
           offset: options.offset,
           limit: options.limit,
           orderId: options.orderId,
+          idempotencyKey: options.idempotencyKey,
           userId: options.userId,
           game: options.game,
           uid: options.uid,

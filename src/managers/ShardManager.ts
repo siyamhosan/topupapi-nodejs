@@ -1,4 +1,4 @@
-import { BaseHeaders, NodeContract, ShardContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, NodeContract, ShardContract } from "@/api/contract";
 import { NodeAddDto, PartialShardConfigDto } from "@/types/node";
 import { initClient } from "@ts-rest/core";
 
@@ -9,6 +9,7 @@ export class ShardManager {
     this._api = initClient(ShardContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
   }
 

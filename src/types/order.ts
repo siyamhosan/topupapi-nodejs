@@ -10,9 +10,11 @@ export const Order = object({
   amount: string(),
   callbackUrl: string(),
   state: number(),
+  idempotencyKey: string().nullable(),
 });
 
 export const OrderPostDto = object({
+  idempotencyKey: string().max(255).optional(),
   game: SupportedGame,
   amount: string(),
   uid: string(),
@@ -85,6 +87,7 @@ export const orderSchema = z.object({
   userId: z.number(),
   node_id: z.number(),
   state: z.number(),
+  idempotencyKey: z.string().nullable(),
   sequences: z.array(sequenceSchema),
   user: userSchema,
 });
@@ -128,6 +131,7 @@ export const OrderQuearyDto = object({
   limit: number(),
 
   orderId: string().optional(),
+  idempotencyKey: string().max(255).optional(),
   userId: string().optional(),
   game: string().optional(),
   uid: string().optional(),

@@ -1,4 +1,4 @@
-import { BaseHeaders, NodeContract } from "@/api/contract";
+import { BaseHeaders, fetchApi, NodeContract } from "@/api/contract";
 import { NodeAddDto, PartialShardConfigDto } from "@/types/node";
 import { initClient } from "@ts-rest/core";
 
@@ -9,6 +9,7 @@ export class NodeManager {
     this._api = initClient(NodeContract, {
       baseHeaders: BaseHeaders({ token }),
       baseUrl,
+      api: fetchApi,
     });
   }
 
