@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.10.2
+
+### Patch Changes
+
+- b84e71f: API END Changed
+
 ## 0.10.1
 
 ### Patch Changes
