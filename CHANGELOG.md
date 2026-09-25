@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.10.0
+
+### Minor Changes
+
+- 0fc0734: Added idempotencyKey to orders;
+
 ## 0.9.1
 
 ### Patch Changes
