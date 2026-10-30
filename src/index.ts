@@ -114,6 +114,7 @@ import {
   SequenceState,
 } from "@/types/state";
 import { ShardHealth } from "@/types/shard";
+import { ApiRequestError } from "@/utils/ApiRequestError";
 import { diffSeconds } from "@/utils/diffSeconds";
 
 export {
@@ -219,6 +220,7 @@ export {
   StockLookupSequenceSchema,
   StockLookupStatusSchema,
   StockLookupSequenceRole,
+  ApiRequestError,
 };
 
 export default TopUpClient;

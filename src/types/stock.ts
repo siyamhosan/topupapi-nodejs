@@ -284,7 +284,7 @@ export const StockFullResponse = object({
 });
 
 export const StockLookupDto = object({
-	query: string(),
+	query: string().min(1).max(256),
 });
 
 export const StockLookupSequenceRole = z.enum(["primary", "backup", "other"]);

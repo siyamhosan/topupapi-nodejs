@@ -7,6 +7,7 @@ import {
   StockRefundDto,
   StockUndoDto,
 } from "@/types/stock";
+import { ApiRequestError } from "@/utils/ApiRequestError";
 import { initClient } from "@ts-rest/core";
 import { StockPriceManager, SupportedGame } from "..";
 import { StockAccountManager } from "./StockAccountManager";
@@ -80,9 +81,13 @@ export class StockManager {
 
     if (res.status === 200 || res.status === 201) {
       return res.body.data;
-    } else {
-      throw new Error(`Failed to lookup stock: ${JSON.stringify(res.body)}`);
     }
+
+    throw new ApiRequestError(
+      `Failed to lookup stock: ${JSON.stringify(res.body)}`,
+      res.status,
+      res.body,
+    );
   }
 
   /**
