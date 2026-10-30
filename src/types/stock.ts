@@ -282,3 +282,62 @@ export const StockFullResponse = object({
 		}).array(),
 	}),
 });
+
+export const StockLookupDto = object({
+	query: string(),
+});
+
+export const StockLookupSequenceRole = z.enum(["primary", "backup", "other"]);
+
+export const StockLookupOrderSchema = object({
+	id: number(),
+	userId: number(),
+	game: SupportedGame,
+	uid: string(),
+	amount: string(),
+	state: number(),
+	idempotencyKey: string().nullable().optional(),
+	createdAt: z.union([string(), z.date()]),
+});
+
+export const StockLookupSequenceSchema = object({
+	id: number(),
+	package: string(),
+	amount: number(),
+	stock_id: number().nullable().optional(),
+	backUpStock_id: number().nullable().optional(),
+	role: StockLookupSequenceRole,
+});
+
+export const StockLookupStatusSchema = object({
+	partialPending: number().array().nullable().optional(),
+	errorLogData: z.unknown().nullable().optional(),
+	sequenceStates: z.unknown().nullable().optional(),
+	nickname: string().nullable().optional(),
+}).nullable();
+
+export const StockLookupItemSchema = object({
+	stock: Stock.extend({
+		amount: number().nullable().optional(),
+		usedFor: number().nullable().optional(),
+		lastUpdate: string().nullable().optional(),
+		varified: boolean().nullable().optional(),
+		updatedAt: string().optional(),
+		price: z.union([string(), number()]).optional(),
+	}).passthrough(),
+	owner: object({
+		id: number(),
+		name: string(),
+	})
+		.nullable()
+		.optional(),
+	orders: object({
+		order: StockLookupOrderSchema,
+		sequences: StockLookupSequenceSchema.array(),
+		status: StockLookupStatusSchema,
+	}).array(),
+});
+
+export const StockLookupResponse = object({
+	stocks: StockLookupItemSchema.array(),
+});

@@ -1,5 +1,11 @@
 # topupapi
 
+## 0.10.3
+
+### Patch Changes
+
+- Add stock lookup API client for code history and linked orders
+
 ## 0.10.2
 
 ### Patch Changes

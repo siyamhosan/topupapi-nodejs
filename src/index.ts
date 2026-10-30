@@ -78,6 +78,13 @@ import {
   UNIPIN_VOUCHERWITHID,
   StockPinResponse,
   StockFullResponse,
+  StockLookupDto,
+  StockLookupResponse,
+  StockLookupItemSchema,
+  StockLookupOrderSchema,
+  StockLookupSequenceSchema,
+  StockLookupStatusSchema,
+  StockLookupSequenceRole,
 } from "@/types/stock";
 import {
   FormattedStockPrice,
@@ -205,6 +212,13 @@ export {
   UserUpdateDto,
   StockPinResponse,
   StockFullResponse,
+  StockLookupDto,
+  StockLookupResponse,
+  StockLookupItemSchema,
+  StockLookupOrderSchema,
+  StockLookupSequenceSchema,
+  StockLookupStatusSchema,
+  StockLookupSequenceRole,
 };
 
 export default TopUpClient;
