@@ -3,9 +3,11 @@ import {
   StockAddOptions,
   StockBuyDto,
   StockCheckDto,
+  StockLookupDto,
   StockRefundDto,
   StockUndoDto,
 } from "@/types/stock";
+import { ApiRequestError } from "@/utils/ApiRequestError";
 import { initClient } from "@ts-rest/core";
 import { StockPriceManager, SupportedGame } from "..";
 import { StockAccountManager } from "./StockAccountManager";
@@ -66,6 +68,26 @@ export class StockManager {
     } else {
       throw new Error(`Failed to add stock: ${JSON.stringify(res.body)}`);
     }
+  }
+
+  /**
+   * Look up a stock code's history and every linked order.
+   * Merchants only see their own stock; admins can look up any owner.
+   */
+  async lookup({ query }: typeof StockLookupDto._type) {
+    const res = await this._api.lookup({
+      body: { query },
+    });
+
+    if (res.status === 200 || res.status === 201) {
+      return res.body.data;
+    }
+
+    throw new ApiRequestError(
+      `Failed to lookup stock: ${JSON.stringify(res.body)}`,
+      res.status,
+      res.body,
+    );
   }
 
   /**

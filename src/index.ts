@@ -78,6 +78,13 @@ import {
   UNIPIN_VOUCHERWITHID,
   StockPinResponse,
   StockFullResponse,
+  StockLookupDto,
+  StockLookupResponse,
+  StockLookupItemSchema,
+  StockLookupOrderSchema,
+  StockLookupSequenceSchema,
+  StockLookupStatusSchema,
+  StockLookupSequenceRole,
 } from "@/types/stock";
 import {
   FormattedStockPrice,
@@ -107,6 +114,7 @@ import {
   SequenceState,
 } from "@/types/state";
 import { ShardHealth } from "@/types/shard";
+import { ApiRequestError } from "@/utils/ApiRequestError";
 import { diffSeconds } from "@/utils/diffSeconds";
 
 export {
@@ -205,6 +213,14 @@ export {
   UserUpdateDto,
   StockPinResponse,
   StockFullResponse,
+  StockLookupDto,
+  StockLookupResponse,
+  StockLookupItemSchema,
+  StockLookupOrderSchema,
+  StockLookupSequenceSchema,
+  StockLookupStatusSchema,
+  StockLookupSequenceRole,
+  ApiRequestError,
 };
 
 export default TopUpClient;

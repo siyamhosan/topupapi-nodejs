@@ -24,6 +24,8 @@ import {
   StockCheckResponse,
   StockFetchResponse,
   StockFullResponse,
+  StockLookupDto,
+  StockLookupResponse,
   StockPinResponse,
   StockRefundDto,
   StockRefundResponse,
@@ -121,6 +123,14 @@ export const StockContract = c.router(
       method: "POST",
       body: StockCheckDto,
       responses: Responses(StockCheckResponse),
+    },
+    lookup: {
+      path: "/lookup",
+      method: "POST",
+      body: StockLookupDto,
+      description:
+        "Look up stock code history and linked orders (own stock for merchants, any for admins)",
+      responses: Responses(StockLookupResponse),
     },
     buy: {
       path: "/buy",
