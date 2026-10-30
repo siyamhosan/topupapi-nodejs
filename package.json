@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
+    "prepare": "node -e \"require('fs').accessSync('src/index.ts');\" && pnpm run build || true",
     "release": "pnpm run build && changeset publish",
     "lint": "tsc"
   },
